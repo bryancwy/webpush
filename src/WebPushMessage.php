@@ -71,6 +71,7 @@ class WebPushMessage
      * @var mixed
      */
     protected $data;
+    protected $url;
 
     /**
      * Set the notification title.
@@ -234,6 +235,13 @@ class WebPushMessage
     public function data($value)
     {
         $this->data = $value;
+
+        return $this;
+    }
+
+    public function url($value)
+    {
+        $this->url = $value;
 
         return $this;
     }
