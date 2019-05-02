@@ -45,7 +45,9 @@ class WebPushChannel
             );
         });
 
+        customLog('request', 'send', $subscriptions . $payload, get_client_ip(), 'pushNotifications');
         $response = $this->webPush->flush();
+        customLog('request', 'response', json_encode($response), get_client_ip(), 'pushNotifications');
 
         $this->deleteInvalidSubscriptions($response, $subscriptions);
     }
