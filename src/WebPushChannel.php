@@ -4,6 +4,7 @@ namespace NotificationChannels\WebPush;
 
 use Minishlink\WebPush\WebPush;
 use Illuminate\Notifications\Notification;
+use App\Models\UserNotification;
 
 class WebPushChannel
 {
@@ -48,6 +49,10 @@ class WebPushChannel
         customLog('request', 'send', $subscriptions . $payload, get_client_ip(), 'pushNotifications');
         $response = $this->webPush->flush();
         customLog('request', 'response', json_encode($response), get_client_ip(), 'pushNotifications');
+
+        $notification = new PushBrowserNotificationPayload;
+        $notification = $payload;
+        $notification->save();
 
         $this->deleteInvalidSubscriptions($response, $subscriptions);
     }
